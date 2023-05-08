@@ -1,0 +1,16 @@
+[
+  {
+    "hc": "40306332",
+    "firstname": "Lucas Nahuel ",
+    "lastname": "Diaz Mouhsen",
+    "lastAppointment": "2020-12-31",
+    "box": "87654321"
+  },
+  {
+    "hc": "123456789",
+    "firstname": "Marisa",
+    "lastname": "Mouhsen",
+    "lastAppointment": "2006-04-25",
+    "box": "12345678"
+  }
+]
