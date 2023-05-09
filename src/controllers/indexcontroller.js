@@ -7,21 +7,26 @@ const { log } = require('console');
 module.exports = {
   index: (req, res, next) => {
     res.render("index", {
-        title: "Archivo" 
+        title: "Archivo",
+        req: req.body
     });
   },
   addHc: (req, res, next) => {
-    console.log(req, "principio controler");
-    const { hc, firstname, lastname, lastAppointment, box, _startTime } = req.body
-    historiasClinicas.push({
-      hc,
-      firstname,
-      lastname,
-      lastAppointment,
-      box,
-      _startTime
-    });
-    fs.writeFileSync(historiasClinicasPath, JSON.stringify(historiasClinicas, null, 2));
-    res.redirect('/');
+    const errors = validationResult(req)
+    const { hc, firstname, lastname, lastAppointment, box } = req.body
+    if (errors.isEmpty()){
+      historiasClinicas.push({
+        hc,
+        firstname,
+        lastname,
+        lastAppointment,
+        box
+      });
+      fs.writeFileSync(historiasClinicasPath, JSON.stringify(historiasClinicas, null, 2));
+      res.redirect('/')
+    } else {
+      console.log(errors);
+      res.redirect('/');
+    }
   }
 };

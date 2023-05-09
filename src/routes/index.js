@@ -4,7 +4,7 @@ const {index, addHc} = require('../controllers/indexcontroller.js');
 const Validations = require('../validations/index.js')
 
 /* GET home page. */
-router.get('/', Validations, index);
+router.get('/', index);
 router.post('/', Validations, addHc);
 
 

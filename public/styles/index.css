@@ -1,5 +1,16 @@
-span { 
+
+.box-errores{
+  display: none;
+  justify-content: center;
+  margin-bottom: 15px;
+  color: white;
+}
+.flex{
+  display: flex;
+}
+.errores { 
   color: red;
+  font-size: 20px;
 }
 
 .index {
@@ -33,6 +44,11 @@ span {
 .form-register h4 {
   font-size: 22px;
   margin-bottom: 20px;
+}
+
+.form-register h3{
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .controls {

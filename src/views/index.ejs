@@ -5,33 +5,37 @@
     <link rel='stylesheet' href='/styles/style.css' />
   </head>
   <body class="index">
-    <form action="/" method="POST">
+    <form action="/" method="POST" id="form">
       <section class="form-register">
-        <h4>Ingreso de HC</h4>
-        <input class="controls" type="number" name="hc" id="hc" placeholder="HC">
+        <h4>Ingreso de Historia Clinica</h4>
+        <input class="controls" type="text" name="hc" id="hc" placeholder="HC">
+        <div class="box-errores">
+          <span class="errores text-danger"></span>
+        </div>
           <% if (locals.errors && errors.hc) { %>
-            <span class="errores"><%= errors.hc.msg %> </span>
+            <span id="errores" class="errores"><%= errors.hc.msg %> </span>
           <% } %>
         <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" >
+        <span class="errores text-danger"></span>
           <% if (locals.errors && errors.firstname) { %>
-            <span class="errores"><%= errors.firstname.msg %> </span>
+            <span id="errores" class="errores"><%= errors.firstname.msg %> </span>
           <% } %>
         <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido">
+        <span class="errores text-danger"></span>
           <% if (locals.errors && errors.lastname) { %>
-            <span class="errores"><%= errors.lastname.msg %> </span>
+            <span id="errores" class="errores"><%= errors.lastname.msg %> </span>
+            <%= console.log(errors.lastname.msg); %>
           <% } %>
+        <h3 for="lastAppointment">Ultimo registro:</h3>
         <input class="controls" type="date" name="lastAppointment" id="lastAppointment" placeholder="Ultimo registro">
-          <% if (locals.errors && errors.lastAppointment) { %>
-            <span class="errores"><%= errors.lastAppointment.msg %> </span>
-          <% } %>
+          
         <input class="controls" type="text" name="box" id="box" placeholder="Ingrese caja">
-          <% if (locals.errors && errors.box) { %>
-            <span class="errores"><%= errors.box.msg %> </span>
-          <% } %>
+          
         <input class="botons" type="submit" value="Registrar">
       </section>
     </form>
     
-  
+    <script src="/js/Validations.js"></script>
   </body>
+
 </html>
