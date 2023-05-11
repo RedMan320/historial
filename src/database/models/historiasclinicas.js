@@ -2,8 +2,6 @@
 const {
   Model
 } = require('sequelize');
-const historiasclinicas = require('./cajas');
-const historiasclinicas = require('./personas');
 module.exports = (sequelize, DataTypes) => {
   class HistoriasClinicas extends Model {
     /**
@@ -13,12 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Personas.hasOne(historiasclinicas, { 
-        foreignKey: 'personaId' 
-      });
-      Cajas.belongsTo(historiasclinicas, { 
-        foreignKey: 'cajaId' 
-      });
+      models.Personas.belongsTo(HistoriasClinicas);
+      models.Cajas.hasMany(HistoriasClinicas);
     }
   }
   HistoriasClinicas.init({
