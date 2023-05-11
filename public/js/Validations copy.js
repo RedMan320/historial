@@ -8,26 +8,31 @@ let boxErrores = document.querySelectorAll(".box-errores")
 let form = document.getElementById("form")
 
 window.addEventListener("load",()=>{
-    function validateField(field, minLength, maxLength, regex) {
-        const value = field.value.trim();
-        const isValid = value.length >= minLength && value.length <= maxLength && regex.test(value);
-        field.style.border = isValid ? "1px solid #10dc60" : "1px solid #f04141";
-        boxErrores[field.dataset.index].style.display = isValid ? "none" : "flex";
-      }
-      
-      hc.addEventListener("input", () => {
-        validateField(hc, 6, 20, /^[a-zA-Z0-9]+$/);
-      });
-      
-      firstname.addEventListener("input", () => {
-        validateField(firstname, 6, 100, /^[a-zA-Z]+$/);
-      });
-      
-      lastname.addEventListener("input", () => {
-        validateField(lastname, 6, 100, /^[a-zA-Z]+$/);
-      });
-      
-      lastAppointment.addEventListener("input", () => {
+    hc.addEventListener("input",()=>{
+        if (hc.value.trim().length < 6 || hc.value.trim().length > 20 || !/^[a-zA-Z0-9]+$/.test(hc.value.trim())) {
+            hc.style.border = "1px solid #f04141";
+        }else{
+            hc.style.border = "1px solid #10dc60";
+            boxErrores[0].style.display="none"
+        }
+    })
+    firstname.addEventListener("input",()=>{
+        if (firstname.value.trim().length < 6 || firstname.value.trim().length > 100 || !/^[a-zA-Z]+$/.test(firstname.value.trim())) {
+            firstname.style.border = "1px solid #f04141";
+        }else{
+            firstname.style.border = "1px solid #10dc60";
+            boxErrores[1].style.display="none"
+        }
+    })
+    lastname.addEventListener("input",()=>{
+        if (lastname.value.trim().length < 6 || lastname.value.trim().length > 100 || !/^[a-zA-Z]+$/.test(lastname.value.trim())) {
+            lastname.style.border = "1px solid #f04141";
+        }else{
+            lastname.style.border = "1px solid #10dc60";
+            boxErrores[2].style.display="none"
+        }
+    })
+    lastAppointment.addEventListener("input",()=>{
         const date = new Date(lastAppointment.value).toString() !== "Invalid Date"
         if ( !date || /^[0-9\s]+$/.test(lastAppointment.value.trim())) {
             lastAppointment.style.border = "1px solid #f04141";
@@ -35,12 +40,16 @@ window.addEventListener("load",()=>{
             lastAppointment.style.border = "1px solid #10dc60";
             boxErrores[3].style.display="none"
         }
-      });
-      
-      box.addEventListener("input", () => {
-        validateField(box, 4, 50, /^[a-zA-Z0-9]+$/);
-      });
-      
+    })
+    box.addEventListener("input",()=>{
+        if (box.value.trim().length < 4 || box.value.trim().length > 50 || !/^[a-zA-Z0-9]+$/.test(box.value.trim())) {
+            box.style.border = "1px solid #f04141";
+        }else{
+            box.style.border = "1px solid #10dc60";
+            boxErrores[4].style.display="none"
+        }
+    })
+
 
     form.addEventListener("submit",e=>{
         e.preventDefault()

@@ -5,5 +5,12 @@
     "lastname": "diaz mouhsen",
     "lastAppointment": "1997-02-01",
     "box": "12345678"
+  },
+  {
+    "hc": "asd123",
+    "firstname": "licasd",
+    "lastname": "mouhsen",
+    "lastAppointment": "2023-05-19",
+    "box": "12345678"
   }
 ]

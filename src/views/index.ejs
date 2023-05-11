@@ -8,29 +8,37 @@
     <form action="/" method="POST" id="form">
       <section class="form-register">
         <h4>Ingreso de Historia Clinica</h4>
-        <input class="controls" type="text" name="hc" id="hc" placeholder="HC">
+        <input class="controls" type="text" name="hc" id="hc" placeholder="HC" data-index="0">
         <div class="box-errores">
           <span class="errores text-danger"></span>
         </div>
           <% if (locals.errors && errors.hc) { %>
             <span id="errores" class="errores"><%= errors.hc.msg %> </span>
           <% } %>
-        <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" >
-        <span class="errores text-danger"></span>
+        <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" data-index="1">
+        <div class="box-errores">
+          <span class="errores text-danger"></span>
+        </div>
           <% if (locals.errors && errors.firstname) { %>
             <span id="errores" class="errores"><%= errors.firstname.msg %> </span>
           <% } %>
-        <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido">
-        <span class="errores text-danger"></span>
+        <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido" data-index="2">
+        <div class="box-errores">
+          <span class="errores text-danger"></span>
+        </div>
           <% if (locals.errors && errors.lastname) { %>
             <span id="errores" class="errores"><%= errors.lastname.msg %> </span>
             <%= console.log(errors.lastname.msg); %>
           <% } %>
         <h3 for="lastAppointment">Ultimo registro:</h3>
-        <input class="controls" type="date" name="lastAppointment" id="lastAppointment" placeholder="Ultimo registro">
-          
-        <input class="controls" type="text" name="box" id="box" placeholder="Ingrese caja">
-          
+        <input class="controls" type="date" name="lastAppointment" id="lastAppointment" placeholder="Ultimo registro" data-index="3">
+        <div class="box-errores">
+          <span class="errores text-danger"></span>
+        </div>
+        <input class="controls" type="text" name="box" id="box" placeholder="Ingrese caja" data-index="4">
+        <div class="box-errores" >
+          <span class="errores text-danger"></span>
+        </div>
         <input class="botons" type="submit" value="Registrar">
       </section>
     </form>
