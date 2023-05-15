@@ -37,7 +37,7 @@ window.addEventListener("load",()=>{
       });
       
       box.addEventListener("input", () => {
-        validateField(box, 4, 50, /^[a-zA-Z0-9]+$/);
+        validateField(box, 2, 50, /^[a-zA-Z0-9]+$/);
       });
 
     form.addEventListener("submit",e=>{

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/styles/style.css' />
+</head>
+
+<body class="index">
+  <section>
+
+    <h1>Todos las historias clinicas</h1>
+
+    <div class="div_container">
+      <% historiasclinicas.forEach(historiaclinica => { %>
+        <article class="art">
+          <div class="div_img">
+            <p class="hc">
+              <%= historiaclinica.hc %>
+            </p>
+            <!-- <p class="nombre">
+              <%= historiaclinica.nombre %>
+            </p>
+            <p class="apellido">
+              <%= historiaclinica.apellido %>
+            </p>
+            <p class="ultimo-registro">
+              <%= historiaclinica.ultimoRegistro %>
+            </p>
+            <p class="caja">
+              <%= historiaclinica.codigoBarras %>
+            </p> -->
+          </div>
+        </article>
+      <% }) %>
+    </div>
+    
+
+  </section>
+
+  <script src="/js/Validations.js"></script>
+</body>
+
+</html>

@@ -26,6 +26,6 @@ module.exports = [
         .trim()
         .toLowerCase()
         .notEmpty().withMessage('El numero de caja es obligatorio').bail()
-        .isLength({min: 4, max: 20 }).withMessage('La caja debe tener entre 4 y 20 caracteres')
+        .isLength({min: 2, max: 20 }).withMessage('La caja debe tener entre 2 y 20 caracteres')
         .matches(/^[a-zA-Z0-9\s]+$/).withMessage('El numero de caja solo debe contener letras y números'),
 ]

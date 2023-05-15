@@ -4,7 +4,7 @@ const path = require('path');
 const historiasClinicas = JSON.parse(fs.readFileSync(historiasClinicasPath, 'utf-8')); */
 const {validationResult} = require('express-validator');
 
-const db = require('../database/models');
+const {HistoriasClinicas, Cajas, Personas} = require('../database/models');
 
 
 module.exports = {
@@ -20,19 +20,19 @@ module.exports = {
     if (errors.isEmpty()) {
       try {
         // Obtener el id de la caja
-        const caja = await db.Cajas.create({
+        const caja = await Cajas.create({
           codigoBarras: box.trim()
         });
         const cajaId = caja.id;
   
         // Obtener el id de la persona
-        const persona = await db.Personas.create({
+        const persona = await Personas.create({
           nombre: firstname.trim(),
           apellido: lastname.trim()
         });
         const personaId = persona.id;
   
-        const historiasClinicas = await db.HistoriasClinicas.create({
+        const historiasClinicas = await HistoriasClinicas.create({
           hc: hc.trim(),
           ultimoRegistro: lastAppointment,
           personaId: personaId,
@@ -56,6 +56,19 @@ module.exports = {
         req: req.body
       });
     }
+  },
+  listado: async (req, res) => {
+    try {
+      const historiasClinicas = await historiasClinicas.findAll();
+      res.render('listado', {
+        title: 'Listado',
+        historiasClinicas
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error al obtener los datos del listado');
+    }
   }
+  
   
 };
