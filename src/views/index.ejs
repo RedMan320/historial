@@ -1,64 +1,81 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/styles/style.css' />
-  </head>
+<%- include('./partials/head') %>
+
   <body class="index">
-    <form action="/" method="POST" id="form">
-      <section class="form-register">
-        <h4>Ingreso de Historia Clinica</h4>
-        <input class="controls" type="text" name="hc" id="hc" placeholder="HC" data-index="0">
-        <div class="box-errores-front">
-          <span class="errores text-danger"></span>
-        </div>
+    <%- include('./partials/header') %>
+
+    <!-- <% if (errors) { %>
+      <div class="alert alert-dark" role="alert" id="alert">
+        <p id="alert-p"> Se envio correctamente</p>
+      </div>
+      <% } %> -->
+      <form action="/" method="POST" id="form" class="mt-5">
+        <section class="form-register ">
+          <h4>Ingreso de Historia Clinica</h4>
+          <input class="controls" type="text" name="hc" id="hc" placeholder="HC" data-index="0">
+          <div class="box-errores-front">
+            <span class="errores text-danger"></span>
+          </div>
           <% if (locals.errors && errors.hc) { %>
             <div class="box-errores-back">
-              <span id="errores" class="errores text-danger"><%= errors.hc.msg %> </span>
+              <span id="errores" class="errores text-danger">
+                <%= errors.hc.msg %>
+              </span>
             </div>
-          <% } %>
-        <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" data-index="1">
-        <div class="box-errores-front">
-          <span class="errores text-danger"></span>
-        </div>
-          <% if (locals.errors && errors.firstname) { %>
-            <div class="box-errores-back">
-              <span id="errores" class="errores text-danger"><%= errors.firstname.msg %> </span>
-            </div>
-          <% } %>
-        <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido" data-index="2">
-        <div class="box-errores-front">
-          <span class="errores text-danger"></span>
-        </div>
-          <% if (locals.errors && errors.lastname) { %>
-            <div class="box-errores-back">
-              <span id="errores" class="errores text-danger"><%= errors.lastname.msg %> </span>
-            </div>
-          <% } %>
-        <h3 for="lastAppointment">Ultimo registro:</h3>
-        <input class="controls" type="date" name="lastAppointment" id="lastAppointment" placeholder="Ultimo registro" data-index="3">
-        <div class="box-errores-front">
-          <span class="errores text-danger"></span>
-        </div>
-        <% if (locals.errors && errors.lastAppointment) { %>
-          <div class="box-errores-back">
-            <span id="errores" class="errores text-danger"><%= errors.lastAppointment.msg %> </span>
-          </div>
-        <% } %>
-        <input class="controls" type="text" name="box" id="box" placeholder="Ingrese caja" data-index="4">
-        <div class="box-errores-front" >
-          <span class="errores text-danger"></span>
-        </div>
-        <% if (locals.errors && errors.box) { %>
-          <div class="box-errores-back">
-            <span id="errores" class="errores text-danger"><%= errors.box.msg %> </span>
-          </div>
-        <% } %>
-        <input class="botons" type="submit" value="Registrar">
-      </section>
-    </form>
-    
-    <script src="/js/Validations.js"></script>
+            <% } %>
+              <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" data-index="1">
+              <div class="box-errores-front">
+                <span class="errores text-danger"></span>
+              </div>
+              <% if (locals.errors && errors.firstname) { %>
+                <div class="box-errores-back">
+                  <span id="errores" class="errores text-danger">
+                    <%= errors.firstname.msg %>
+                  </span>
+                </div>
+                <% } %>
+                  <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido"
+                    data-index="2">
+                  <div class="box-errores-front">
+                    <span class="errores text-danger"></span>
+                  </div>
+                  <% if (locals.errors && errors.lastname) { %>
+                    <div class="box-errores-back">
+                      <span id="errores" class="errores text-danger">
+                        <%= errors.lastname.msg %>
+                      </span>
+                    </div>
+                    <% } %>
+                      <h3 for="lastAppointment">Ultimo registro:</h3>
+                      <input class="controls" type="date" name="lastAppointment" id="lastAppointment"
+                        placeholder="Ultimo registro" data-index="3">
+                      <div class="box-errores-front">
+                        <span class="errores text-danger"></span>
+                      </div>
+                      <% if (locals.errors && errors.lastAppointment) { %>
+                        <div class="box-errores-back">
+                          <span id="errores" class="errores text-danger">
+                            <%= errors.lastAppointment.msg %>
+                          </span>
+                        </div>
+                        <% } %>
+                          <input class="controls" type="text" name="box" id="box" placeholder="Ingrese caja"
+                            data-index="4">
+                          <div class="box-errores-front">
+                            <span class="errores text-danger"></span>
+                          </div>
+                          <% if (locals.errors && errors.box) { %>
+                            <div class="box-errores-back">
+                              <span id="errores" class="errores text-danger">
+                                <%= errors.box.msg %>
+                              </span>
+                            </div>
+                            <% } %>
+                              <input class="botons" type="submit" value="Registrar">
+        </section>
+
+      </form>
+
+      <script src="/js/Validations.js"></script>
   </body>
 
-</html>
+  </html>

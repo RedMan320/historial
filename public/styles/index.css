@@ -1,28 +1,15 @@
-
-.index {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-  
-.index.a {
-  color: #00B7FF;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-
 .form-register {
-  width: 400px;
+  width: 50%;
   background: #24303c;
   padding: 30px;
   margin: auto;
-  margin-top: 100px;
   border-radius: 4px;
-  font-family: 'calibri';
   color: white;
   box-shadow: 7px 13px 37px #000;
 }
@@ -94,3 +81,11 @@
   color: #f04141;
   font-size: 20px;
 }
+
+/* 
+@media (max-width: 400px) {
+  .form-register {
+    width: 85%;
+    padding: 15px;
+  }
+} */

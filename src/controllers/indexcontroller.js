@@ -1,22 +1,26 @@
 const fs = require('fs');
 const path = require('path');
-/* const historiasClinicasPath = path.join(__dirname, '../data/historiasClinicas.json');
-const historiasClinicas = JSON.parse(fs.readFileSync(historiasClinicasPath, 'utf-8')); */
-const {validationResult} = require('express-validator');
+/* const HistoriasClinicasPath = path.join(__dirname, '../data/HistoriasClinicas.json');
+const HistoriasClinicas = JSON.parse(fs.readFileSync(HistoriasClinicasPath, 'utf-8')); */
+const { validationResult } = require('express-validator');
 
-const {HistoriasClinicas, Cajas, Personas} = require('../database/models');
-
+const { HistoriasClinicas, Cajas, Personas } = require('../database/models');
+const capitalizarPrimeraLetra = require('../utils/capitalizeOneLetter')
+const obtenerNumeros = require('../utils/obtenerNumero')
+const obtenerFecha = require('../utils/obtenerFecha')
 
 module.exports = {
   index: (req, res, next) => {
+    const errors =  validationResult(req);
     res.render("index", {
-        title: "Archivo"
+      title: "Archivo",
+      errors
     });
   },
   addHc: async (req, res, next) => {
     const errors = validationResult(req);
     const { hc, firstname, lastname, lastAppointment, box } = req.body;
-  
+
     if (errors.isEmpty()) {
       try {
         // Obtener el id de la caja
@@ -24,21 +28,21 @@ module.exports = {
           codigoBarras: box.trim()
         });
         const cajaId = caja.id;
-  
+
         // Obtener el id de la persona
         const persona = await Personas.create({
           nombre: firstname.trim(),
           apellido: lastname.trim()
         });
         const personaId = persona.id;
-  
-        const historiasClinicas = await HistoriasClinicas.create({
+
+        await HistoriasClinicas.create({
           hc: hc.trim(),
           ultimoRegistro: lastAppointment,
           personaId: personaId,
           cajaId: cajaId
         });
-  
+
         return res.render("index", {
           title: "Archivo",
           errors: errors.mapped(),
@@ -59,16 +63,20 @@ module.exports = {
   },
   listado: async (req, res) => {
     try {
-      const historiasClinicas = await historiasClinicas.findAll();
+      const historias = await HistoriasClinicas.findAll({
+        include: ['persona', 'caja'],
+              });
       res.render('listado', {
         title: 'Listado',
-        historiasClinicas
+        historias,
+        capitalizarPrimeraLetra,
+        obtenerNumeros,
+        obtenerFecha
       });
     } catch (error) {
       console.error(error);
       res.status(500).send('Error al obtener los datos del listado');
     }
   }
-  
-  
-};
+}
+
