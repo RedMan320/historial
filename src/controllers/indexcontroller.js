@@ -19,8 +19,8 @@ module.exports = {
   },
   addHc: async (req, res, next) => {
     const errors = validationResult(req);
-    const { hc, firstname, lastname, lastAppointment, box } = req.body;
-
+    const { hc, firstname, lastAppointment, lastname, box } = req.body;
+    const ultimoRegistro = new Date(lastAppointment)
     if (errors.isEmpty()) {
       try {
         // Obtener el id de la caja
@@ -38,7 +38,7 @@ module.exports = {
 
         await HistoriasClinicas.create({
           hc: hc.trim(),
-          ultimoRegistro: lastAppointment,
+          ultimoRegistro: ultimoRegistro.setDate(ultimoRegistro.getDate() +1),
           personaId: personaId,
           cajaId: cajaId
         });
@@ -65,6 +65,7 @@ module.exports = {
     try {
       const historias = await HistoriasClinicas.findAll({
         include: ['persona', 'caja'],
+        order: [['id','desc']]
               });
       res.render('listado', {
         title: 'Listado',

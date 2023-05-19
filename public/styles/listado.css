@@ -2,3 +2,6 @@
 .form-header{
     background-color: #1f53c5;
   }
+  .filtro{
+    display: none;
+  }

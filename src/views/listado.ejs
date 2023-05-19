@@ -2,9 +2,9 @@
 <%- include('./partials/head') %> 
 
 <body class="listado">
-  <%- include('./partials/header') %> 
+  <%- include('./partials/headerConBuscador') %> 
   <section class="m-5">
-        <table class="table table-dark table-hover">
+        <table class="table table-dark table-hover pt-5">
           <thead>
             <tr class="form-header">
               <th scope="col">#</th>
@@ -16,24 +16,26 @@
               <th scope="col">CAJA</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="fila">
 
             <% historias.forEach(historia=> { %>
-              <tr>
+              <tr id="tr">
                 <th scope="row"><%= historia.id %></th>
-                <td><%= historia.hc %></td>
-                <td><%= obtenerFecha(historia.ultimoRegistro) %></td>
-                <td><%= obtenerNumeros(historia.hc) %></td>
-                <td><%= capitalizarPrimeraLetra(historia.persona.nombre) %></td>
-                <td><%= capitalizarPrimeraLetra(historia.persona.apellido) %></td>
-                <td><%= historia.caja.codigoBarras %></td>
+                <td id="hc"><%= historia.hc %></td>
+                <td id="ultimoRegistro"><%= obtenerFecha(historia.ultimoRegistro) %></td>
+                <td id="dni"><%= obtenerNumeros(historia.hc) %></td>
+                <td id="persona"><%= capitalizarPrimeraLetra(historia.persona.nombre) %></td>
+                <td id="apellido"><%= capitalizarPrimeraLetra(historia.persona.apellido) %></td>
+                <td id="codigoBarras"><%= historia.caja.codigoBarras %></td>
                 <% }) %>
               </tr>
           </tbody>
         </table>
   </section>
 
-  <script src="/js/Validations.js"></script>
+  <!-- <script src="/js/Validations.js"></script> -->
+  <script src="/js/Buscador.js"></script>
+  <script src="/js/paraDestruccion.js"></script>
 </body>
 
 </html>

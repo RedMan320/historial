@@ -15,17 +15,22 @@ function validateField(field, minLength, maxLength, regex) {
   field.style.border = isValid ? "1px solid #10dc60" : "1px solid #f04141";
   isValid ? boxErrores[field.dataset.index].removeAttribute('style') : null
 }
+function validatesubmit (){
+  const value = field.value.trim();
+  const isValid = value.length >= minLength && value.length <= maxLength && regex.test(value);
+
+}
 window.addEventListener("load", () => {
   hc.addEventListener("input", () => {
-    validateField(hc, 4, 20, /^[a-zA-Z0-9]+$/);
+    validateField(hc, 4, 20, /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/);
   });
 
   firstname.addEventListener("input", () => {
-    validateField(firstname, 2, 100, /^[a-zA-Z\s]+$/);
+    validateField(firstname, 2, 100, /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/);
   });
 
   lastname.addEventListener("input", () => {
-    validateField(lastname, 2, 100, /^[a-zA-Z\s]+$/);
+    validateField(lastname, 2, 100, /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/);
   });
 
   lastAppointment.addEventListener("input", () => {
@@ -39,7 +44,7 @@ window.addEventListener("load", () => {
   });
 
   box.addEventListener("input", () => {
-    validateField(box, 2, 50, /^[a-zA-Z0-9]+$/);
+    validateField(box, 1, 50, /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/);
   });
 
   form.addEventListener("submit", e => {
@@ -58,6 +63,7 @@ window.addEventListener("load", () => {
       const { element, index, errorMessage } = field;
       const value = element.value.trim();
 
+      
       if (value.length <= 0) {
         boxErrores[index].style.display = "flex";
         span[index].innerHTML = errorMessage;
