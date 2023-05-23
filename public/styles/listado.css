@@ -1,7 +1,14 @@
-
-.form-header{
-    background-color: #1f53c5;
-  }
-  .filtro{
-    display: none;
-  }
+.table{
+  background-color: #24303c;
+  color: #fff;
+}
+table .detail{
+  width: 5%;
+  text-align: center;
+ }
+ table .detail i{
+  font-size: 25px;
+ }
+.filtro {
+  display: none;
+}

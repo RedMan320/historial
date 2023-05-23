@@ -22,7 +22,7 @@ const mesNumerico = {
       const fechaLimite = new Date();
       fechaLimite.setFullYear(fechaLimite.getFullYear() - 10);
       if (fechaParseada < fechaLimite) {
-        registro.parentNode.style.backgroundColor = 'red'
+        registro.parentNode.style.backgroundColor = '#dc3545'
       }
     });
   });

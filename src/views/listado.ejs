@@ -1,41 +1,53 @@
+<%- include('./partials/head') %>
 
-<%- include('./partials/head') %> 
-
-<body class="listado">
-  <%- include('./partials/headerConBuscador') %> 
-  <section class="m-5">
-        <table class="table table-dark table-hover pt-5">
-          <thead>
+  <body class="listado">
+    <%- include('./partials/headerConBuscador') %>
+      <section>
+        <table class="table table-hover pt-5">
+          <p class="w-5">
+            Total de registros: 
+            <%= historias.reduce((maxId, historia)=> Math.max(maxId, historia.id), 0) %>
+          </p>
+          <thead class="">
             <tr class="form-header">
-              <th scope="col">#</th>
               <th scope="col">HISTORIA CLINICA</th>
+              <!-- <th scope="col" class="chau">ULTIMO REGISTRO</th>
+              <th scope="col" class="chau">DNI</th> -->
               <th scope="col">ULTIMO REGISTRO</th>
-              <th scope="col">DNI</th>
-              <th scope="col">NOMBRE</th>
-              <th scope="col">APELLIDO</th>
-              <th scope="col">CAJA</th>
+              <th scope="col">NOMBRE Y APELLIDO</th>
+              <!-- <th scope="col" class="chau">CAJA</th> -->
+              <th scope="col" class="detail">#</th>
             </tr>
           </thead>
           <tbody id="fila">
 
             <% historias.forEach(historia=> { %>
               <tr id="tr">
-                <th scope="row"><%= historia.id %></th>
-                <td id="hc"><%= historia.hc %></td>
-                <td id="ultimoRegistro"><%= obtenerFecha(historia.ultimoRegistro) %></td>
-                <td id="dni"><%= obtenerNumeros(historia.hc) %></td>
-                <td id="persona"><%= capitalizarPrimeraLetra(historia.persona.nombre) %></td>
-                <td id="apellido"><%= capitalizarPrimeraLetra(historia.persona.apellido) %></td>
-                <td id="codigoBarras"><%= historia.caja.codigoBarras %></td>
+                <td id="hc">
+                  <%= historia.hc %>
+                </td>
+                <td id="ultimoRegistro">
+                  <%= obtenerFecha(historia.ultimoRegistro) %>
+                </td>
+                <!-- <td id="dni"><%= obtenerNumeros(historia.hc) %></td> -->
+                <td id="persona">
+                  <%= capitalizarPrimeraLetra(historia.persona.nombre) %>
+                    <%= capitalizarPrimeraLetra(historia.persona.apellido) %>
+                </td>
+                <!-- <td id="codigoBarras"><%= historia.caja.codigoBarras %></td> -->
+
+                <td scope="row" class="detail">
+                  <a href="/HC/<%= historias.id %>" ><i class="fa fa-fw fa-user"></i></a>
+                </td>
                 <% }) %>
               </tr>
           </tbody>
         </table>
-  </section>
+      </section>
 
-  <!-- <script src="/js/Validations.js"></script> -->
-  <script src="/js/Buscador.js"></script>
-  <script src="/js/paraDestruccion.js"></script>
-</body>
+      <!-- <script src="/js/Validations.js"></script> -->
+      <script src="/js/Buscador.js"></script>
+      <script src="/js/paraDestruccion.js"></script>
+  </body>
 
-</html>
+  </html>
