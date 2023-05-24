@@ -1,0 +1,75 @@
+<%- include('./partials/head') %>
+
+  <body class="index">
+    <%- include('./partials/header') %>
+      <form action="" method="POST" id="form" class="form">
+        <section class="form-register ">
+          <h4>Ingreso de Historia Clinica</h4>
+          <input class="controls" type="text" name="hc" id="hc" placeholder="HC/DNI" data-index="0" value="<%= historia.hc %>">
+          <div class="box-errores-front">
+            <span class="errores text-danger"></span>
+          </div>
+          <% if (locals.errors && errors.hc) { %>
+            <div class="box-errores-back">
+              <span id="errores" class="errores text-danger">
+                <%= errors.hc.msg %>
+              </span>
+            </div>
+            <% } %>
+              <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" data-index="1" value="<%= historia.persona.nombre %>">
+              <div class="box-errores-front">
+                <span class="errores text-danger"></span>
+              </div>
+              <% if (locals.errors && errors.firstname) { %>
+                <div class="box-errores-back">
+                  <span id="errores" class="errores text-danger">
+                    <%= errors.firstname.msg %>
+                  </span>
+                </div>
+                <% } %>
+                  <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido"
+                    data-index="2" value="<%= historia.persona.apellido %>">
+                  <div class="box-errores-front">
+                    <span class="errores text-danger"></span>
+                  </div>
+                  <% if (locals.errors && errors.lastname) { %>
+                    <div class="box-errores-back">
+                      <span id="errores" class="errores text-danger">
+                        <%= errors.lastname.msg %>
+                      </span>
+                    </div>
+                    <% } %>
+                      <h3 for="lastAppointment">Ultimo registro:</h3>
+                      <input class="controls" type="date" name="lastAppointment" id="lastAppointment"
+                        placeholder="Ultimo registro" data-index="3" value="<%= historia.ultimoRegistro%>">
+                      <div class="box-errores-front">
+                        <span class="errores text-danger"></span>
+                      </div>
+                      <% if (locals.errors && errors.lastAppointment) { %>
+                        <div class="box-errores-back">
+                          <span id="errores" class="errores text-danger">
+                            <%= errors.lastAppointment.msg %>
+                          </span>
+                        </div>
+                        <% } %>
+                          <input class="controls" type="text" name="box" id="box" placeholder="Ultimos 3 digitos del DNI"
+                            data-index="4" value="<%= historia.caja.codigoBarras %>">
+                          <div class="box-errores-front">
+                            <span class="errores text-danger"></span>
+                          </div>
+                          <% if (locals.errors && errors.box) { %>
+                            <div class="box-errores-back">
+                              <span id="errores" class="errores text-danger">
+                                <%= errors.box.msg %>
+                              </span>
+                            </div>
+                            <% } %>
+                              <input class="botons" type="submit" value="Registrar">
+        </section>
+
+      </form>
+
+      <script src="/js/Validations.js"></script>
+  </body>
+
+  </html>

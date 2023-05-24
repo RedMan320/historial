@@ -3,7 +3,7 @@
   <body class="listado">
     <%- include('./partials/headerConBuscador') %>
       <section>
-        <table class="table table-hover pt-5">
+        <table class="table table-hover">
           <p class="w-5">
             Total de registros: 
             <%= historias.reduce((maxId, historia)=> Math.max(maxId, historia.id), 0) %>
@@ -11,11 +11,8 @@
           <thead class="">
             <tr class="form-header">
               <th scope="col">HISTORIA CLINICA</th>
-              <!-- <th scope="col" class="chau">ULTIMO REGISTRO</th>
-              <th scope="col" class="chau">DNI</th> -->
               <th scope="col">ULTIMO REGISTRO</th>
               <th scope="col">NOMBRE Y APELLIDO</th>
-              <!-- <th scope="col" class="chau">CAJA</th> -->
               <th scope="col" class="detail">#</th>
             </tr>
           </thead>
@@ -29,15 +26,13 @@
                 <td id="ultimoRegistro">
                   <%= obtenerFecha(historia.ultimoRegistro) %>
                 </td>
-                <!-- <td id="dni"><%= obtenerNumeros(historia.hc) %></td> -->
                 <td id="persona">
                   <%= capitalizarPrimeraLetra(historia.persona.nombre) %>
                     <%= capitalizarPrimeraLetra(historia.persona.apellido) %>
                 </td>
-                <!-- <td id="codigoBarras"><%= historia.caja.codigoBarras %></td> -->
 
                 <td scope="row" class="detail">
-                  <a href="/HC/<%= historias.id %>" ><i class="fa fa-fw fa-user"></i></a>
+                  <a href="/hc/<%= historia.id %>" ><i class="fas fa-male"></i></a>
                 </td>
                 <% }) %>
               </tr>
@@ -45,7 +40,6 @@
         </table>
       </section>
 
-      <!-- <script src="/js/Validations.js"></script> -->
       <script src="/js/Buscador.js"></script>
       <script src="/js/paraDestruccion.js"></script>
   </body>

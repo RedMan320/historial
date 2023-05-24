@@ -7,11 +7,12 @@ const { validationResult } = require('express-validator');
 const { HistoriasClinicas, Cajas, Personas } = require('../database/models');
 const capitalizarPrimeraLetra = require('../utils/capitalizeOneLetter')
 const obtenerNumeros = require('../utils/obtenerNumero')
-const obtenerFecha = require('../utils/obtenerFecha')
+const obtenerFecha = require('../utils/obtenerFecha');
+const { log } = require('console');
 
 module.exports = {
   index: (req, res, next) => {
-    const errors =  validationResult(req);
+    const errors = validationResult(req);
     res.render("index", {
       title: "Archivo",
       errors
@@ -32,13 +33,14 @@ module.exports = {
         // Obtener el id de la persona
         const persona = await Personas.create({
           nombre: firstname.trim(),
-          apellido: lastname.trim()
+          apellido: lastname.trim(),
+          dni: obtenerNumeros(hc)
         });
         const personaId = persona.id;
 
         await HistoriasClinicas.create({
           hc: hc.trim(),
-          ultimoRegistro: ultimoRegistro.setDate(ultimoRegistro.getDate() +1),
+          ultimoRegistro: ultimoRegistro.setDate(ultimoRegistro.getDate() + 1),
           personaId: personaId,
           cajaId: cajaId
         });
@@ -65,8 +67,8 @@ module.exports = {
     try {
       const historias = await HistoriasClinicas.findAll({
         include: ['persona', 'caja'],
-        order: [['id','desc']]
-              });
+        order: [['id', 'desc']]
+      });
       res.render('listado', {
         title: 'Listado',
         historias,
@@ -78,6 +80,26 @@ module.exports = {
       console.error(error);
       res.status(500).send('Error al obtener los datos del listado');
     }
+  },
+  paciente: async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      console.log(req.params.id);
+      const paciente = await HistoriasClinicas.findByPk(req.params.id,{
+        include: ['persona', 'caja']
+      });
+      if (paciente) {
+        /* res.send(paciente); */
+        res.render("paciente", {
+          title: "paciente",
+          errors,
+          historia: paciente
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+   
   }
 }
 
