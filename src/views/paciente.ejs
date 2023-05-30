@@ -5,8 +5,9 @@
       <form action="" method="POST" id="form" class="form">
         <section class="form-register ">
           <h4>Ingreso de Historia Clinica</h4>
-          <input class="controls" type="text" name="hc" id="hc" placeholder="HC/DNI" data-index="0" value="<%= historia.hc %>">
-          <div class="box-errores-front">
+          <p><%= historia.hc %></p>
+          <!-- <input class="controls" type="text" name="hc" id="hc" placeholder="HC/DNI" data-index="0" value="<%= historia.hc %>">
+          <div class="box-errores-front"> -->
             <span class="errores text-danger"></span>
           </div>
           <% if (locals.errors && errors.hc) { %>
@@ -16,7 +17,8 @@
               </span>
             </div>
             <% } %>
-              <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" data-index="1" value="<%= historia.persona.nombre %>">
+            <p><%=  historia.persona.nombre%></p>  
+            <!-- <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" data-index="1" value="<%= historia.persona.nombre %>"> -->
               <div class="box-errores-front">
                 <span class="errores text-danger"></span>
               </div>
@@ -27,8 +29,9 @@
                   </span>
                 </div>
                 <% } %>
-                  <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido"
-                    data-index="2" value="<%= historia.persona.apellido %>">
+                <p><%=  historia.persona.apellido%></p>  
+                <!-- <input class="controls" type="text" name="lastname" id="lastname" placeholder="Apellido"
+                    data-index="2" value="<%= historia.persona.apellido %>"> -->
                   <div class="box-errores-front">
                     <span class="errores text-danger"></span>
                   </div>
@@ -40,8 +43,9 @@
                     </div>
                     <% } %>
                       <h3 for="lastAppointment">Ultimo registro:</h3>
-                      <input class="controls" type="date" name="lastAppointment" id="lastAppointment"
-                        placeholder="Ultimo registro" data-index="3" value="<%= historia.ultimoRegistro%>">
+                      <p><%=  historia.ultimoRegistro %></p>
+                      <!-- <input class="controls" type="date" name="lastAppointment" id="lastAppointment"
+                        placeholder="Ultimo registro" data-index="3" value="<%= historia.ultimoRegistro%>"> -->
                       <div class="box-errores-front">
                         <span class="errores text-danger"></span>
                       </div>
@@ -52,8 +56,9 @@
                           </span>
                         </div>
                         <% } %>
-                          <input class="controls" type="text" name="box" id="box" placeholder="Ultimos 3 digitos del DNI"
-                            data-index="4" value="<%= historia.caja.codigoBarras %>">
+                        <p><%= historia.caja.codigoBarras %></p>  
+                        <!-- <input class="controls" type="text" name="box" id="box" placeholder="Ultimos 3 digitos del DNI"
+                            data-index="4" value="<%= historia.caja.codigoBarras %>"> -->
                           <div class="box-errores-front">
                             <span class="errores text-danger"></span>
                           </div>
@@ -64,7 +69,7 @@
                               </span>
                             </div>
                             <% } %>
-                              <input class="botons" type="submit" value="Registrar">
+                            <input class="botons" type="submit" value="Registrar">
         </section>
 
       </form>

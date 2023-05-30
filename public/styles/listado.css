@@ -7,6 +7,7 @@
 }
 .table td{
   vertical-align: middle;
+  width: 15%;
 }
 table .detail{
   width: 5%;
@@ -18,8 +19,9 @@ table .detail{
 .filtro {
   display: none;
 }
-@media (min-width: 515px) {
+@media screen and (min-width: 425px) {
   .table{
+    /* display: flex; */
     width: 80%;
     margin: auto;
     padding: 0.75rem;

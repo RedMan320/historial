@@ -4,6 +4,7 @@
 .navbar-header {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   width: 100%;
   background-color: #555;
   overflow: auto;
@@ -18,20 +19,15 @@
 }
 .navbar-header .search {
   display: flex;
-  justify-content: end;
   margin: 10px;
+  justify-content: left;
 }
 .active {
   background-color: #1f53c5
   
 }
-@media screen and (max-width: 760px) {
+@media screen and (min-width: 425px) {
   .navbar-header {
-    flex-direction: column;
-  }
-  .navbar-header .search {
-    display: flex;
-    justify-content: left;
-    margin: 10px;
+    flex-direction: row;
   }
 }
