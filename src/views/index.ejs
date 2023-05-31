@@ -3,7 +3,7 @@
   <body class="index">
     <%- include('./partials/header') %>
 
-    <!-- <% if (errors) { %>
+      <!-- <% if (errors) { %>
       <div class="alert alert-dark" role="alert" id="alert">
         <p id="alert-p"> Se envio correctamente</p>
       </div>
@@ -58,8 +58,8 @@
                           </span>
                         </div>
                         <% } %>
-                          <input class="controls" type="text" name="box" id="box" placeholder="Ultimos 3 digitos del DNI"
-                            data-index="4">
+                          <input class="controls" type="text" name="box" id="box"
+                            placeholder="Ultimos 3 digitos del DNI" data-index="4">
                           <div class="box-errores-front">
                             <span class="errores text-danger"></span>
                           </div>
@@ -70,7 +70,22 @@
                               </span>
                             </div>
                             <% } %>
-                              <input class="botons" type="submit" value="Registrar">
+                              <input class="botons" id="myBtn" type="submit" value="Registrar">
+                              <div>
+                                <!-- <button class="botons" id="myBtn" type="button">Open Modal</button>
+ -->
+                                <!-- The Modal -->
+                                <div id="myModal" class="modal">
+
+                                  <!-- Modal content -->
+                                  <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <p>Click para confirmar registro</p>
+                                    <button class="botons" id="btnModalSubmit" type="submit" value="Registrar">Registrar Historia clinica</button>
+                                  </div>
+
+                                </div>
+                              </div>
         </section>
 
       </form>

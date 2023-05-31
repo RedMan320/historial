@@ -93,7 +93,10 @@ module.exports = {
         res.render("paciente", {
           title: "paciente",
           errors,
-          historia: paciente
+          historia: paciente,
+          capitalizarPrimeraLetra,
+          obtenerNumeros,
+          obtenerFecha
         });
       }
     } catch (error) {

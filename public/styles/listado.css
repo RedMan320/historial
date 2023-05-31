@@ -19,7 +19,7 @@ table .detail{
 .filtro {
   display: none;
 }
-@media screen and (min-width: 425px) {
+@media screen and (min-width: 525px) {
   .table{
     /* display: flex; */
     width: 80%;

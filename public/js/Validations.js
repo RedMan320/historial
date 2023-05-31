@@ -8,21 +8,33 @@ let boxErrores = document.querySelectorAll(".box-errores-front")
 let form = document.getElementById("form")
 let alert = document.getElementById("alert")
 let alertp = document.getElementById("alert-p")
-
+/* Modal */
+let modal = document.getElementById("myModal");
+let btnModal = document.getElementById("myBtn");
+let spanModal = document.getElementsByClassName("close")[0];
+let btnModalSubmit = document.getElementById("btnModalSubmit")
 function validateField(field, minLength, maxLength, regex) {
   const value = field.value.trim();
   const isValid = value.length >= minLength && value.length <= maxLength && regex.test(value);
   field.style.border = isValid ? "1px solid #10dc60" : "1px solid #f04141";
   isValid ? boxErrores[field.dataset.index].removeAttribute('style') : null
 }
-function validatesubmit (){
+function validatesubmit() {
   const value = field.value.trim();
   const isValid = value.length >= minLength && value.length <= maxLength && regex.test(value);
 
 }
 window.addEventListener("load", () => {
   hc.addEventListener("input", () => {
-    validateField(hc, 4, 20, /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/);
+    /* validateField(hc, 4, 20, /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/); */
+    const value = hc.value.trim();
+    const isValid = value.length >= 4 && value.length <= 20 && /^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9]+$/.test(value) && /\d/.test(value);
+    hc.style.border = isValid ? "1px solid #10dc60" : "1px solid #f04141";
+    isValid ? boxErrores[hc.dataset.index].removeAttribute('style') : null
+    /* if (value.length >= minLength && value.length <= maxLength && regex.test(value) && /\d/.test(hc.value)) {
+      field.style.border = isValid ? "1px solid #10dc60" : "1px solid #f04141";
+      isValid ? boxErrores[field.dataset.index].removeAttribute('style') : null
+    } */
   });
 
   firstname.addEventListener("input", () => {
@@ -63,7 +75,7 @@ window.addEventListener("load", () => {
       const { element, index, errorMessage } = field;
       const value = element.value.trim();
 
-      
+
       if (value.length <= 0) {
         boxErrores[index].style.display = "flex";
         span[index].innerHTML = errorMessage;
@@ -76,8 +88,29 @@ window.addEventListener("load", () => {
     });
 
     if (erroresActivos.length === 0) {
-      form.submit();
+      btnModal.onclick = function () {
+        modal.style.display = "block";
+      }
+      spanModal.onclick = function () {
+        modal.style.display = "none";
+      }
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+      btnModalSubmit.onclick = (e) =>{
+        form.submit();
+      }
     }
   })
+  // When the user clicks on the button, open the modal
+  
+
+  // When the user clicks on <span> (x), close the modal
+  
+
+  // When the user clicks anywhere outside of the modal, close it
+  
 })
 
