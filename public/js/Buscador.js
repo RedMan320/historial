@@ -2,7 +2,7 @@
 const searchInput = document.getElementById('searchInput');
 const tr = document.querySelectorAll('#tr');
 const fila = document.getElementById('fila');
-
+const searchForm = document.getElementById('searchForm')
 // Agrega un evento de escucha al botón de búsqueda
 function removeDiacritics(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -23,6 +23,11 @@ window.addEventListener('load', () => {
                 fila.children[index].classList.add('filtro');
             }
         });
+        
+    });
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Evita que el formulario se envíe y se recargue la página
+        // No se realiza ninguna acción adicional aquí
     });
 });
 

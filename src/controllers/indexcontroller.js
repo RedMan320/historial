@@ -8,11 +8,12 @@ const { HistoriasClinicas, Cajas, Personas } = require('../database/models');
 const capitalizarPrimeraLetra = require('../utils/capitalizeOneLetter')
 const obtenerNumeros = require('../utils/obtenerNumero')
 const obtenerFecha = require('../utils/obtenerFecha');
-const { log } = require('console');
 
 module.exports = {
   index: (req, res, next) => {
     const errors = validationResult(req);
+    const url = req.url
+    console.log(url);
     res.render("index", {
       title: "Archivo",
       errors
@@ -65,6 +66,7 @@ module.exports = {
   },
   listado: async (req, res) => {
     try {
+      const url = req.url
       const historias = await HistoriasClinicas.findAll({
         include: ['persona', 'caja'],
         order: [['id', 'desc']]
@@ -84,8 +86,8 @@ module.exports = {
   paciente: async (req, res, next) => {
     try {
       const errors = validationResult(req);
-      console.log(req.params.id);
-      const paciente = await HistoriasClinicas.findByPk(req.params.id,{
+      const url = req.url
+      const paciente = await HistoriasClinicas.findByPk(req.params.id, {
         include: ['persona', 'caja']
       });
       if (paciente) {
@@ -102,7 +104,7 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
-   
+
   }
 }
 

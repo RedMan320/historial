@@ -34,13 +34,13 @@
   color: var(--color-form-text-input);
   outline: #24303c
 }
-
+/* 
 .form-register p {
   height: 40px;
   text-align: center;
   font-size: 18px;
   line-height: 40px;
-}
+} */
 
 .form-register a {
   color: white;
@@ -53,7 +53,7 @@
 
 .form-register .botons {
   width: 100%;
-  background: #1f53c5;
+  background: var(--color-form-button);
   border: none;
   padding: 12px;
   color: white;
@@ -129,10 +129,16 @@
     border-radius: 4px;
     box-shadow: 7px 13px 37px #000;
   }
+  .modal-content {
+    width: 80%;
+  }
 }
 
 @media screen and (min-width: 825px) {
   .form-register{
+    width: 50%;
+  }
+  .modal-content{
     width: 50%;
   }
 }

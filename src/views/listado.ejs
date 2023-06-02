@@ -1,19 +1,27 @@
 <%- include('./partials/head') %>
 
   <body class="listado">
-    <%- include('./partials/headerConBuscador') %>
+    <%- include('./partials/header') %>
       <section>
+
         <table class="table table-hover">
-          <p class="w-5">
-            Total de registros: 
-            <%= historias.reduce((maxId, historia)=> Math.max(maxId, historia.id), 0) %>
-          </p>
+          <div class="search-length">
+            <p class="m-0 align-self-center">
+              Total de registros:
+              <%= historias.length%>
+            </p>
+            <div class="d-flex search">
+              <form id="searchForm">
+                <input id="searchInput" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
+              </form>
+            </div>
+          </div>
           <thead class="">
             <tr class="form-header">
-              <th scope="col">HISTORIA CLINICA</th>
-              <th scope="col">ULTIMO REGISTRO</th>
+              <th scope="col">HISTORIA CLÍNICA</th>
+              <th scope="col">ÚLTIMO REGISTRO</th>
               <th scope="col">NOMBRE Y APELLIDO</th>
-              <th scope="col" class="detail">#</th>
+              <th scope="col" class="detail"></th>
             </tr>
           </thead>
           <tbody id="fila">
@@ -31,7 +39,7 @@
                 </td>
 
                 <td scope="row" class="detail">
-                  <a href="/hc/<%= historia.id %>" ><i class="fas fa-male"></i></a>
+                  <a href="/hc/<%= historia.id %>" ><i class="fa-solid fa-circle-info"></i></a>
                 </td>
                 <% }) %>
               </tr>

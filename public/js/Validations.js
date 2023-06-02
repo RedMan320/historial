@@ -70,7 +70,7 @@ window.addEventListener("load", () => {
       { element: box, index: 4, errorMessage: "La caja es obligatoria" }
     ];
     let erroresActivos = [];
-
+    
     fields.forEach(field => {
       const { element, index, errorMessage } = field;
       const value = element.value.trim();

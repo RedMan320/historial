@@ -1,18 +1,28 @@
 .form-header {
   background-color: var(--color-header-logo);
 }
-.navbar-header {
+.header {
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
   width: 100%;
+  padding: 0.75rem 0.75rem;
   background-color: var(--color-header);
   overflow: auto;
+  border-bottom: 2px solid var(--color-background);
+}
+.header .logo {
+  height: 100%;
+  color: var(--color-header-logo);
+  font-size: 23px;
+  padding: 0.75rem;
+}
+.navbar-header {
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar-header a {
   float: left;
-  padding: 12px;
   color: var(--color-header-a);
   text-decoration: none;
   font-size: 17px;
@@ -22,12 +32,15 @@
   margin: 10px;
   justify-content: left;
 }
-.active {
-  background-color: var(--color-header-logo)
-  
-}
 @media screen and (min-width: 525px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.75rem;
+    align-items: center;
+  }
   .navbar-header {
     flex-direction: row;
+    align-items: center;
   }
 }
