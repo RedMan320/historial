@@ -18,14 +18,19 @@ textarea {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
-  background-color: #6c757d !important;
+  font-family: var(--font-family);
+  background-color: var(--color-background) !important;
 }
 
-/* .header{
-    position: fixed !important;
-    top: 0;
-    width: 100%;
-    height: 50px;
-
-} */
+:root{
+  --font-family: 'Roboto', sans-serif;
+  --color-background: #6c757d;
+  --color-header: #555;
+  --color-header-logo: #1f53c5;
+  --color-header-a: #fff;
+  --color-background-form: #24303c;
+  --color-form-title: #fff;
+  --color-form-background-input: #24303c;
+  --color-form-border-input: #1f53c5;
+  --color-form-text-input: #808080;
+}

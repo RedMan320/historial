@@ -27,8 +27,7 @@
                   <%= obtenerFecha(historia.ultimoRegistro) %>
                 </td>
                 <td id="persona">
-                  <%= capitalizarPrimeraLetra(historia.persona.nombre) %>
-                    <%= capitalizarPrimeraLetra(historia.persona.apellido) %>
+                  <%= capitalizarPrimeraLetra(historia.persona.nombre) +' '+ capitalizarPrimeraLetra(historia.persona.apellido) %>
                 </td>
 
                 <td scope="row" class="detail">

@@ -1,19 +1,19 @@
 .form-header {
-  background-color: #1f53c5;
+  background-color: var(--color-header-logo);
 }
 .navbar-header {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
-  background-color: #555;
+  background-color: var(--color-header);
   overflow: auto;
 }
 
 .navbar-header a {
   float: left;
   padding: 12px;
-  color: white;
+  color: var(--color-header-a);
   text-decoration: none;
   font-size: 17px;
 }
@@ -23,7 +23,7 @@
   justify-content: left;
 }
 .active {
-  background-color: #1f53c5
+  background-color: var(--color-header-logo)
   
 }
 @media screen and (min-width: 525px) {

@@ -3,13 +3,13 @@
     height: 100%;
     font-size: 1rem;
     line-height: 1.5;
-    background-color: #6c757d;
+    background-color: var(--color-background);
 }
 
 .form-register {
   width: 100%;
-  background: #24303c;
-  color: white;
+  background: var(--color-background-form);
+  color: var(--color-form-title);
   padding: 30px 20px;
 }
 
@@ -25,13 +25,13 @@
 
 .controls {
   width: 100%;
-  background: #24303c;
+  background: var(--color-form-background-input);
   padding: 15px;
   border-radius: 4px;
   margin-bottom: 16px;
-  border: 1px solid #1f53c5;
+  border: 1px solid var(--color-form-border-input);
   font-size: 18px;
-  color: white;
+  color: var(--color-form-text-input);
   outline: #24303c
 }
 
@@ -44,7 +44,6 @@
 
 .form-register a {
   color: white;
-  text-decoration: none;
 }
 
 .form-register a:hover {
