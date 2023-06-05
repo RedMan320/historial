@@ -75,7 +75,7 @@
 .flex{
   display: flex;
 }
-.errores { 
+.form .form-register span { 
   color: #f04141;
   font-size: 20px;
 }
