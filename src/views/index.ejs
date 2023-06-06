@@ -60,15 +60,37 @@
                               </span>
                             </div>
                             <% } %>
-                              <button class="botons" id="btnModalSubmit" type="submit" value="Registrar">Registrar Historia clinica</button>
+                              <button class="botons" id="btnModalSubmit" type="submit" value="Registrar">Registrar
+                                Historia clinica</button>
                               <div class="box-errores-front" id="box-errores-front">
                                 <span class="errores text-danger" id="errores-front"></span>
                               </div>
         </section>
 
       </form>
-
-      <script src="/js/Validations.js"></script>
+      <% if (recordCreated) { %>
+        <!-- Modal -->
+        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Historia Clínica</h5>
+                <button class="btn" >
+                  <span id="myBtn"><i class="fa-solid fa-xmark"></i></span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Registro creado correctamente
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="myBtn" data-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+          <script src="/js/Validations.js"></script>
   </body>
 
   </html>

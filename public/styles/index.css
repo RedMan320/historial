@@ -82,7 +82,8 @@
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  opacity: 1;
+  display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -139,6 +140,6 @@
     width: 50%;
   }
   .modal-content{
-    width: 50%;
+    width: 80%;
   }
 }

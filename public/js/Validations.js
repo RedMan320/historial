@@ -6,6 +6,9 @@ let box = document.getElementById("box")
 let span = document.getElementById("errores-front")
 let boxErrores = document.getElementById("box-errores-front")
 let form = document.getElementById('form');
+/* Modal */
+let modal = document.getElementById("myModal");
+let btnModal = document.querySelectorAll("#myBtn");
 
 const validationHC = [
   { validator: value => value.toLowerCase() !== '', message: 'La historia clínica es obligatoria', index: 0 },
@@ -97,11 +100,12 @@ form.addEventListener('submit', (event) => {
     span.innerHTML = errores.join('.<br>');
   } else {
     span.innerHTML = '';
-    const confirmacion = window.confirm("¿Estás seguro de que deseas enviar el formulario?");
-    if (confirmacion) {
-      form.submit();
-      alert("El registro se envió correctamente");
-    }
+    form.submit();
   }
+});
+btnModal.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
 });
 

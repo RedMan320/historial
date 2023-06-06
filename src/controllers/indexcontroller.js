@@ -16,7 +16,8 @@ module.exports = {
     console.log(url);
     res.render("index", {
       title: "Archivo",
-      errors
+      errors,
+      recordCreated: false
     });
   },
   addHc: async (req, res, next) => {
@@ -49,7 +50,8 @@ module.exports = {
         return res.render("index", {
           title: "Archivo",
           errors: errors.mapped(),
-          req: req.body
+          req: req.body,
+          recordCreated: true
         });
       } catch (error) {
         console.log(error);
@@ -60,7 +62,8 @@ module.exports = {
       return res.render("index", {
         title: "Archivo",
         errors: errors.mapped(),
-        req: req.body
+        req: req.body,
+        recordCreated: false
       });
     }
   },
