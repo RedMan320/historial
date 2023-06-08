@@ -41,7 +41,10 @@
               <%= historia.caja.codigoBarras %>
             </p>
           </div>
-
+          <a href="/delete/<%= historia.id %>">asdasd</a>
+          <form action="/delete/<%= historia.id %>?_method=DELETE" method="POST">
+              <button class="btn text-light" type='submit'>eliminar</button>
+          </form>
         </section>
 
       </form>

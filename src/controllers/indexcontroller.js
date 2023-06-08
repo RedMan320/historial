@@ -8,8 +8,16 @@ const { HistoriasClinicas, Cajas, Personas, Usuarios } = require('../database/mo
 const capitalizarPrimeraLetra = require('../utils/capitalizeOneLetter')
 const obtenerNumeros = require('../utils/obtenerNumero')
 const obtenerFecha = require('../utils/obtenerFecha');
+const { log } = require('console');
 
 module.exports = {
+  error: (req, res, next) => {
+    if (res.status(404)) {
+      res.render('index', {
+        mensaje: 'Pagina no enconetrada'
+      })
+    }
+  },
   index: (req, res, next) => {
     const errors = validationResult(req);
     const url = req.url
@@ -110,47 +118,77 @@ module.exports = {
   },
 
   login: (req, res) => {
-    res.render("login",{
-      title: "Iniciar Sesión",
-      inicio: false
+    res.render("login", {
+      title: "Iniciar Sesión"
     })
   },
   processLogin: (req, res) => {
     let errors = validationResult(req);
-    console.log(req.body);
 
     if (errors.isEmpty()) {
-      const { user } = req.body
-
+      const usuario = req.body.user.trim()
+      console.log(usuario);
       Usuarios.findOne({
-          where: {
-            user
+        where: {
+          usuario
+        }
+      })
+        .then(usuario => {
+          req.session.userLogin = {
+            id: usuario.id,
+            usuario: usuario.usuario
           }
-      })
-          .then(usuario => {
-              req.session.userLogin = {
-                  id: usuario.id,
-                  usuario: usuario.usuario
-              }
-              console.log(req.session.userLogin)
-              /* if (recordar) {
-                  res.cookie("recordarme", req.session.userLogin, { maxAge: 1000 * 60 })
-              } */
-              return res.render('login', {
-                title: 'Iniciar Sesión',
-                inicio: true
-            })
-          })
-          .catch(error => console.log(error))
+          res.cookie("recordarme", req.session.userLogin, { maxAge: 1000 * 60 })
+          /* if (recordar) {
+              res.cookie("recordarme", req.session.userLogin, { maxAge: 1000 * 60 })
+          } */
+          return res.redirect('/login')
+        })
+        .catch(error => console.log(error))
 
-  } else {
+    } else {
       return res.render('login', {
-          title: 'Iniciar Sesión',
-          errors: errors.mapped(),
-          inicio: false
+        title: 'Iniciar Sesión',
+        errors: errors.mapped()
       })
+    }
+  },
+  destroy: (req, res) => {
+    const id = req.params.id;
+    console.log(req.params);
+  
+    // Eliminar HistoriasClinicas
+    HistoriasClinicas.destroy({
+      where: {
+        id: id
+      }
+    })
+      .then(() => {
+        // Eliminar Cajas
+        return Cajas.destroy({
+          where: {
+            id: id
+          }
+        });
+      })
+      .then(() => {
+        // Eliminar Personas
+        return Personas.destroy({
+          where: {
+            id: id
+          }
+        });
+      })
+      .then(() => {
+        // Todas las eliminaciones se realizaron correctamente
+        res.redirect('/listado');
+      })
+      .catch((error) => {
+        // Manejar el error si ocurre alguna falla en las eliminaciones
+        console.error(error);
+        res.status(500).send('Error al eliminar los registros');
+      });
   }
-
-  }
+  
 }
 

@@ -9,6 +9,7 @@ const session = require('express-session');
 const localUser = require('./middleware/localUser');
 
 var indexRouter = require('./routes/index');
+const { log } = require('console');
 
 var app = express();
 
@@ -27,11 +28,13 @@ app.use(session({
   resave : false,
 }));
 
+app.use(localUser)
+
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  next(res.status(404).render('error', {title : 'Pagina no encontrada'}));
 });
 
 // error handler
