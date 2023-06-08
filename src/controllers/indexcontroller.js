@@ -4,7 +4,7 @@ const path = require('path');
 const HistoriasClinicas = JSON.parse(fs.readFileSync(HistoriasClinicasPath, 'utf-8')); */
 const { validationResult } = require('express-validator');
 
-const { HistoriasClinicas, Cajas, Personas } = require('../database/models');
+const { HistoriasClinicas, Cajas, Personas, Usuarios } = require('../database/models');
 const capitalizarPrimeraLetra = require('../utils/capitalizeOneLetter')
 const obtenerNumeros = require('../utils/obtenerNumero')
 const obtenerFecha = require('../utils/obtenerFecha');
@@ -107,6 +107,49 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
+  },
+
+  login: (req, res) => {
+    res.render("login",{
+      title: "Iniciar Sesión",
+      inicio: false
+    })
+  },
+  processLogin: (req, res) => {
+    let errors = validationResult(req);
+    console.log(req.body);
+
+    if (errors.isEmpty()) {
+      const { user } = req.body
+
+      Usuarios.findOne({
+          where: {
+            user
+          }
+      })
+          .then(usuario => {
+              req.session.userLogin = {
+                  id: usuario.id,
+                  usuario: usuario.usuario
+              }
+              console.log(req.session.userLogin)
+              /* if (recordar) {
+                  res.cookie("recordarme", req.session.userLogin, { maxAge: 1000 * 60 })
+              } */
+              return res.render('login', {
+                title: 'Iniciar Sesión',
+                inicio: true
+            })
+          })
+          .catch(error => console.log(error))
+
+  } else {
+      return res.render('login', {
+          title: 'Iniciar Sesión',
+          errors: errors.mapped(),
+          inicio: false
+      })
+  }
 
   }
 }

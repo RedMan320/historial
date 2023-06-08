@@ -1,0 +1,38 @@
+<%- include('./partials/head') %>
+
+
+    <body class="login">
+        <%- include('./partials/header') %>
+
+            <form action="/login" method="POST" id="form" class="form">
+                <section class="form-register ">
+                    <h4 class="text-center">Inicio de Sesión</h4>
+                    <div class="div-datos">
+                        <h5 class="p-2">Ingrese Usuario:</h5>
+                        <input class="controls" type="text" name="user" id="user" placeholder="Usuario" data-index="0">
+                        <div class="login-alert"> <small class="text-danger small">
+                            <%= locals.errors && errors.user ? errors.user.msg : null %>
+                        </small>
+                        <small id="email-Errors"></small>
+                    </div>
+                    </div>
+                    <div class="div-datos">
+                        <h5 class="p-2">Ingrese Contraseña:</h5>
+                        <input class="controls" type="password" name="pass" id="pass" placeholder="Contraseña" data-index="1">
+                        <div class="login-alert"> <small class="text-danger small">
+                            <%= locals.errors && errors.pass ? errors.pass.msg : null %>
+                        </small>
+                        <small id="email-Errors"></small>
+                    </div>
+                    </div>
+                    <button class="botons" id="btnModalSubmit" type="submit">Iniciar sesión</button>
+                    <% if (inicio) { %>
+                        <span>Inicio sesion</span>
+                        <span><%- req.session.userLogin %></span>
+                    <% } %>
+                </section>
+
+            </form>
+    </body>
+
+    </html>
