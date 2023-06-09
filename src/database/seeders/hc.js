@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     personaId: DataTypes.INTEGER,
     ultimoRegistro: DataTypes.DATE,
     cajaId: DataTypes.INTEGER,
-    hc: DataTypes.STRING
+    hc: DataTypes.STRING,
+    vigente: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Historiasclinicas',

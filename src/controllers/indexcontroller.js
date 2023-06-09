@@ -52,7 +52,8 @@ module.exports = {
           hc: hc.trim(),
           ultimoRegistro: ultimoRegistro.setDate(ultimoRegistro.getDate() + 1),
           personaId: personaId,
-          cajaId: cajaId
+          cajaId: cajaId,
+          vigente: 1
         });
 
         return res.render("index", {
@@ -101,7 +102,9 @@ module.exports = {
       const paciente = await HistoriasClinicas.findByPk(req.params.id, {
         include: ['persona', 'caja']
       });
-      if (paciente) {
+      if (!paciente || paciente.vigente === 0) {
+        res.redirect('/listado')
+      } else {
         /* res.send(paciente); */
         res.render("paciente", {
           title: "paciente",
@@ -110,7 +113,7 @@ module.exports = {
           capitalizarPrimeraLetra,
           obtenerNumeros,
           obtenerFecha
-        });
+        })
       }
     } catch (error) {
       console.log(error);
@@ -142,7 +145,7 @@ module.exports = {
           /* if (recordar) {
               res.cookie("recordarme", req.session.userLogin, { maxAge: 1000 * 60 })
           } */
-          return res.redirect('/login')
+          return res.redirect('/')
         })
         .catch(error => console.log(error))
 
@@ -154,44 +157,21 @@ module.exports = {
     }
   },
   destroy: (req, res) =>{
-    let errors = validationResult(req);
-  },
-  destroyOld: (req, res) => {
-    const id = req.params.id;
-    console.log(req.params);
-  
-    // Eliminar HistoriasClinicas
-    HistoriasClinicas.destroy({
-      where: {
-        id: id
+    HistoriasClinicas.update(
+      {
+        vigente: 0
+      },
+      {
+        where: { id: req.params.id}
       }
-    })
-      .then(() => {
-        // Eliminar Cajas
-        return Cajas.destroy({
-          where: {
-            id: id
-          }
-        });
-      })
-      .then(() => {
-        // Eliminar Personas
-        return Personas.destroy({
-          where: {
-            id: id
-          }
-        });
-      })
-      .then(() => {
-        // Todas las eliminaciones se realizaron correctamente
-        res.redirect('/listado');
-      })
-      .catch((error) => {
-        // Manejar el error si ocurre alguna falla en las eliminaciones
-        console.error(error);
-        res.status(500).send('Error al eliminar los registros');
-      });
-  }
-  
+    ).then(() => {
+      return res.redirect('/listado')
+    }).catch(error => console.log(error))
+  },
+  logout: (req, res) => {
+    req.session.destroy();
+    res.cookie("recordarme", null, { MaxAge: -1 });
+    res.redirect('/')
+},  
 }
 

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const {index, addHc, listado, paciente, login, processLogin, destroy} = require('../controllers/indexcontroller.js');
+const {index, addHc, listado, paciente, login, processLogin, destroy, logout} = require('../controllers/indexcontroller.js');
 const Validations = require('../validations/index.js')
 const ValidationsLogin = require('../validations/login.js')
 const loginCheck = require('../middleware/loginCheck');
@@ -11,7 +11,8 @@ router.get('/listado', listado)
 router.get('/hc/:id', paciente)
 router.get('/login', login);
 router.post('/login', ValidationsLogin, processLogin);
-router.put('/edit/:id', destroy);
+router.get('/logout',logout)
+router.post('/hc/:id',loginCheck, destroy);
 
 
 module.exports = router;

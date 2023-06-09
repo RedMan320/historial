@@ -7,9 +7,16 @@
         <table class="table table-hover">
           <div class="search-length">
             <p class="m-0 align-self-center">
-              Cantidad de registros:
-              <%= historias.length%>
+              <% let count = 0; %>
+              <% for(let index = 0; index < historias.length; index++) { %>
+                <% if (historias[index].vigente == 1) { %>
+                   <% count++; %>
+                <% } %>
+              <% } %>
+              Cantidad de registros: <%= count %>
             </p>
+            
+            
             <div class="d-flex search">
               <form id="searchForm">
                 <input id="searchInput" class="form-control" type="search" placeholder="Buscar" aria-label="Search">
@@ -27,20 +34,22 @@
           <tbody id="fila">
 
             <% historias.forEach(historia=> { %>
-              <tr id="tr">
-                <td id="hc">
-                  <%= historia.hc %>
-                </td>
-                <td id="ultimoRegistro">
-                  <%= obtenerFecha(historia.ultimoRegistro) %>
-                </td>
-                <td id="persona">
-                  <%= capitalizarPrimeraLetra(historia.persona.nombre) +' '+ capitalizarPrimeraLetra(historia.persona.apellido) %>
-                </td>
-
-                <td scope="row" class="detail">
-                  <a href="/hc/<%= historia.id %>" ><i class="fa-solid fa-circle-info"></i></a>
-                </td>
+              <% if (historia.vigente === 1) { %>
+                <tr id="tr">
+                  <td id="hc">
+                    <%= historia.hc %>
+                  </td>
+                  <td id="ultimoRegistro">
+                    <%= obtenerFecha(historia.ultimoRegistro) %>
+                  </td>
+                  <td id="persona">
+                    <%= capitalizarPrimeraLetra(historia.persona.nombre) +' '+ capitalizarPrimeraLetra(historia.persona.apellido) %>
+                  </td>
+  
+                  <td scope="row" class="detail">
+                    <a href="/hc/<%= historia.id %>" ><i class="fa-solid fa-circle-info"></i></a>
+                  </td>
+              <% } %>
                 <% }) %>
               </tr>
           </tbody>

@@ -6,7 +6,7 @@
     <a href="/" class="m-1"><i class="fas fa-home p-1"></i> Inicio</a>
     <a href="/listado" class="m-1"><i class="fas fa-list p-1 "></i> Listado</a>
     <% if (locals.userLogin) { %>
-      <span class="text-light m-1"><i class="fas fa-user-circle"></i> <%- locals.userLogin.usuario %></span>
+      <a href="/logout" class="text-light m-1"><i class="fas fa-user-circle"></i> <%- locals.userLogin.usuario %></a>
       <% } else { %>
         <a href="/login" class="m-1"><i class="fas fa-sign-in-alt p-1"></i> Iniciar sesión</a>
         <% } %>

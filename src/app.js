@@ -7,12 +7,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
 const localUser = require('./middleware/localUser');
+var method = require('method-override');
 
 var indexRouter = require('./routes/index');
 const { log } = require('console');
 
 var app = express();
 
+//method-override
+
+app.use(method("_method"))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

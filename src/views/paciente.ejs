@@ -41,9 +41,11 @@
               <%= historia.caja.codigoBarras %>
             </p>
           </div>
-          <form action="/delete/<%= historia.id %>?_method=DELETE" method="POST">
+          <% if (locals.userLogin) { %>
+            <form action="/edit/<%= historia.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
               <button class="btn text-light" type='submit'>eliminar</button>
           </form>
+          <% } %>
         </section>
 
       </form>
