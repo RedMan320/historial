@@ -11,7 +11,7 @@ router.get('/listado', listado)
 router.get('/hc/:id', paciente)
 router.get('/login', login);
 router.post('/login', ValidationsLogin, processLogin);
-router.delete('/delete/:id', destroy);
+router.put('/edit/:id', destroy);
 
 
 module.exports = router;

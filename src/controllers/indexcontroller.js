@@ -153,7 +153,10 @@ module.exports = {
       })
     }
   },
-  destroy: (req, res) => {
+  destroy: (req, res) =>{
+    let errors = validationResult(req);
+  },
+  destroyOld: (req, res) => {
     const id = req.params.id;
     console.log(req.params);
   
