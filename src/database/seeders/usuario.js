@@ -1,24 +1,24 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Usuarios extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  Usuarios.init({
-    usuario: DataTypes.STRING,
-    contraseña: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Usuarios',
-  });
-  return Usuarios;
+const usuarios = require("../../Data/usuarios.json");
+
+function generarDatos() {
+  const datosUsuarios = usuarios.map(usuario => ({
+    usuario: usuario.usuario,
+    contraseña: usuario.contraseña,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }));
+
+  return datosUsuarios;
+}
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    const datos = generarDatos();
+    await queryInterface.bulkInsert('Usuarios', datos, {});
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('Usuarios', null, {});
+  }
 };

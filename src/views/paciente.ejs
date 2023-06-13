@@ -14,13 +14,13 @@
           <div class="div-datos">
             <h5>Nombre:</h5>
             <p>
-              <%= historia.persona.nombre%>
+              <%= capitalizarPrimeraLetra(historia.persona.nombre)%>
             </p>
           </div>
           <div class="div-datos">
             <h5>Apellido:</h5>
             <p>
-              <%= historia.persona.apellido%>
+              <%= capitalizarPrimeraLetra(historia.persona.apellido)%>
             </p>
           </div>
           <div class="div-datos">
@@ -42,9 +42,12 @@
             </p>
           </div>
           <% if (locals.userLogin) { %>
-            <form action="/edit/<%= historia.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
-              <button class="btn text-light" type='submit'>eliminar</button>
+            <a href="/hc/edit/<%= historia.id %>">
+              <button class="botons" type="button" >Editar</button>
+            </a>
           </form>
+          <form action="/hc/delete/<%= historia.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+            <button class="botons text-bg-danger" type='submit'>Eliminar</button>
           <% } %>
         </section>
 

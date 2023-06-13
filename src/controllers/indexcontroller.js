@@ -145,7 +145,7 @@ module.exports = {
           /* if (recordar) {
               res.cookie("recordarme", req.session.userLogin, { maxAge: 1000 * 60 })
           } */
-          return res.redirect('/')
+          return res.redirect('/listado')
         })
         .catch(error => console.log(error))
 
@@ -156,13 +156,13 @@ module.exports = {
       })
     }
   },
-  destroy: (req, res) =>{
+  destroy: (req, res) => {
     HistoriasClinicas.update(
       {
         vigente: 0
       },
       {
-        where: { id: req.params.id}
+        where: { id: req.params.id }
       }
     ).then(() => {
       return res.redirect('/listado')
@@ -172,6 +172,69 @@ module.exports = {
     req.session.destroy();
     res.cookie("recordarme", null, { MaxAge: -1 });
     res.redirect('/')
-},  
+  },
+  edit: async (req, res, next) => {
+    try {
+      const errors = validationResult(req);
+      const paciente = await HistoriasClinicas.findByPk(req.params.id, {
+        include: ['persona', 'caja']
+      });
+      if (!paciente || paciente.vigente === 0) {
+        res.redirect('/listado')
+      } else {
+        /* res.send(paciente); */
+        res.render("edit", {
+          title: "Editar",
+          errors,
+          historia: paciente,
+          capitalizarPrimeraLetra,
+          obtenerNumeros,
+          obtenerFecha,
+          recordCreated: false
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  processEdit: async (req, res) => {
+    const { hc, firstname, lastname, lastAppointment, box } = req.body 
+    const ultimoRegistro = new Date(lastAppointment)
+    try {
+      /* res.send(req.body) */
+      await HistoriasClinicas.update(
+        {
+          hc: hc.trim(),
+          ultimoRegistro: ultimoRegistro.setDate(ultimoRegistro.getDate() + 1),
+        },
+        {
+          where: { id: req.params.id }
+        }
+      )
+      await Cajas.update(
+        {
+          codigoBarras: box.trim()
+        },
+        {
+          where: { id: req.params.id }
+        }
+      )
+      await Personas.update(
+        {
+          nombre: firstname.trim(),
+          apellido: lastname.trim()
+        },
+        {
+          where: { id: req.params.id }
+        }
+      )
+      .then(() => {
+        return res.redirect('/hc/' + req.params.id)
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
 }
 

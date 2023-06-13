@@ -27,15 +27,13 @@
                         </div>
                     </div>
                     <button class="botons" id="btnModalSubmit" type="submit">Iniciar sesión</button>
-                    <div>
-                        <% if (locals.userLogin) { %>
-                            <span>Inicio sesion</span>
-                            <span><%- locals.userLogin.usuario %></span>
-                            <% } %>
+                    <div id="box-errores-front">
+                        <span id="errores-front"></span>
                     </div>
                 </section>
 
             </form>
+            <script src="/js/login_validations.js"></script>
     </body>
 
     </html>
