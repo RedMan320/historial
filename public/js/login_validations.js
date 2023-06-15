@@ -51,6 +51,7 @@ form.addEventListener('submit', (event) => {
           element.style.border = "1px solid #f04141";
           erroresForm[index] = validation.message;
           boxErrores.style.display = "block";
+          boxErrores.style.textAlign = "center";
           return;
         }
       }

@@ -102,10 +102,29 @@ form.addEventListener('submit', (event) => {
     span.innerHTML = '';
     form.submit();
   }
+
 });
 btnModal.forEach(function(btn) {
   btn.addEventListener('click', function() {
     modal.style.display = 'none';
   });
+});
+
+obtenerNumeros= (str) => {
+  const numeros = str.match(/\d+/g);
+  return numeros ? numeros.join('') : '';
+};
+hc.addEventListener('blur', () =>{
+  var ultimosTresNumeros = "";
+  
+  let value = hc.value.trim();
+  let valueNum = obtenerNumeros(value);
+  var matches = valueNum.match(/\d{3}$/);
+
+  if (matches !== null) {
+    ultimosTresNumeros = matches[0];
+  }
+
+  box.value = ultimosTresNumeros;
 });
 
