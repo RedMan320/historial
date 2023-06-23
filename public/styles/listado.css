@@ -33,11 +33,11 @@
 @media screen and (min-width: 525px) {
   .table {
     /* display: flex; */
-    width: 80%;
     margin: auto;
     padding: 0.75rem;
     border-radius: 0.25rem;
     width: fit-content;
+    max-width: 80%;
   }
   /*
     display: block;
