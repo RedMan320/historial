@@ -4,17 +4,19 @@ const {index, addHc, listado, paciente, login, processLogin, destroy, logout,pro
 const Validations = require('../validations/index.js')
 const ValidationsLogin = require('../validations/login.js')
 const loginCheck = require('../middleware/loginCheck');
+const url = require('../middleware/url');
+
 /* GET home page. */
-router.get('/', index);
-router.post('/', Validations, addHc);
-router.get('/listado', listado)
-router.get('/hc/:id', paciente)
-router.get('/login', login);
-router.post('/login', ValidationsLogin, processLogin);
-router.get('/logout',logout)
-router.put('/hc/delete/:id',loginCheck, destroy);
-router.get('/hc/edit/:id', edit);
-router.put('/hc/edit/:id', processEdit);
+router.get('/', url, index);
+router.post('/', Validations, url, addHc);
+router.get('/listado', url, listado)
+router.get('/hc/:id', url, paciente)
+router.get('/login', url, login);
+router.post('/login', ValidationsLogin, url, processLogin);
+router.get('/logout', url,logout)
+router.put('/hc/delete/:id',loginCheck, url, destroy);
+router.get('/hc/edit/:id', url, edit);
+router.put('/hc/edit/:id',  url,processEdit);
 
 
 module.exports = router;

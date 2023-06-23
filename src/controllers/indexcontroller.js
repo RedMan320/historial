@@ -21,7 +21,6 @@ module.exports = {
   index: (req, res, next) => {
     const errors = validationResult(req);
     const url = req.url
-    console.log(url);
     res.render("index", {
       title: "Archivo",
       errors,
