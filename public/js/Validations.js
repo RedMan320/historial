@@ -1,4 +1,5 @@
 let hc = document.getElementById("hc")
+let hc2 = document.getElementById("hc2")
 let firstname = document.getElementById("firstname")
 let lastname = document.getElementById("lastname")
 let lastAppointment = document.getElementById("lastAppointment")
@@ -14,6 +15,12 @@ const validationHC = [
   { validator: value => value.toLowerCase() !== '', message: 'La historia clínica es obligatoria', index: 0 },
   { validator: value => value.length >= 4 && value.length <= 20, message: 'La historia clínica debe tener entre 4 y 20 caracteres', index: 0 },
   { validator: value => /^(?=.*[0-9])/.test(value), message: 'La historia clínica debe contener letras y números', index: 0 }
+]
+const validationHC2 = [
+  { validator: value => value.toLowerCase() !== '', message: 'Debe repetir la historia clínica', index: 5 },
+  { validator: value => value.length >= 4 && value.length <= 20, message: 'La historia clínica debe coincidir', index: 5 },
+  { validator: value => /^(?=.*[0-9])/.test(value), message: 'La historia clínica debe coincidir', index: 5 },
+  { validator: value => hc.value===value, message:'La historia clínica debe coincidir', index: 5}
 ]
 const validationFirstName = [
   { validator: value => value.toLowerCase() !== '', message: 'El nombre no debe estar vacío', index: 1 },
@@ -55,6 +62,9 @@ const validateInput = (element, validations) => {
 hc.addEventListener('input', () => {
   validateInput(hc, validationHC)
 })
+hc2.addEventListener('input', () =>{
+  validateInput(hc2, validationHC2)
+})
 firstname.addEventListener('input', () => {
   validateInput(firstname, validationFirstName)
 })
@@ -90,6 +100,7 @@ form.addEventListener('submit', (event) => {
   };
 
   validateForm(hc, validationHC, 0);
+  validateForm(hc2, validationHC2, 5);
   validateForm(firstname, validationFirstName, 1);
   validateForm(lastname, validationLastName, 2);
   validateForm(lastAppointment, validationLastAppointment, 3);

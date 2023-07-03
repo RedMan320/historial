@@ -15,6 +15,17 @@
               </span>
             </div>
             <% } %>
+
+            <input class="controls" type="text" name="hc2" id="hc2" placeholder="Repita HC" data-index="5">
+
+            <% if (locals.errors && errors.hc2) { %>
+              <div class="box-errores-back">
+                <span id="errores" class="errores text-danger">
+                  <%= errors.hc2.msg %>
+                </span>
+              </div>
+              <% } %>
+
               <input class="controls" type="text" name="firstname" id="firstname" placeholder="Nombre" data-index="1">
 
               <% if (locals.errors && errors.firstname) { %>
