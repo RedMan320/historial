@@ -58,6 +58,12 @@ const validateInput = (element, validations) => {
   return '';
 };
 
+hc.addEventListener('paste', (e) => {
+  e.preventDefault()
+})
+hc2.addEventListener('paste', (e) => {
+  e.preventDefault()
+})
 
 hc.addEventListener('input', () => {
   validateInput(hc, validationHC)
