@@ -7,15 +7,6 @@ module.exports = [
         .notEmpty().withMessage('La historia clinica es obligatoria').bail()
         .isLength({min: 4, max: 20}).withMessage('La historia clinica debe tener entre 4 y 20 caracteres')
         .matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$/).withMessage('La historia clinica solo debe contener letras y números'),    
-    check('hc2')
-        .trim()
-        .toLowerCase()
-        .notEmpty().withMessage('Debe repetir la historia clinica').bail()
-        .custom((value, { req }) => {
-            if (value !== req.body.hc) {
-                throw new Error('La historia clínica no coincide');
-            }
-        }),
     check('firstname')
         .trim()
         .toLowerCase()
