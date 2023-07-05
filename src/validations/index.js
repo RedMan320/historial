@@ -1,4 +1,4 @@
-const { check } = require('express-validator');
+const { body,check } = require('express-validator');
 
 module.exports = [
     check('hc')
@@ -7,6 +7,17 @@ module.exports = [
         .notEmpty().withMessage('La historia clinica es obligatoria').bail()
         .isLength({min: 4, max: 20}).withMessage('La historia clinica debe tener entre 4 y 20 caracteres')
         .matches(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\s]+$/).withMessage('La historia clinica solo debe contener letras y números'),    
+    check('hc2')
+        .custom((value, { req }) => {
+            const hc = req.body.hc.trim().toLowerCase();
+            const hc2 = value.trim().toLowerCase();
+    
+            if (hc !== hc2) {
+                throw new Error('La historia clínica no coincide');
+            }
+    
+            return true;
+        }),    
     check('firstname')
         .trim()
         .toLowerCase()

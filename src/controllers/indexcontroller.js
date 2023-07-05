@@ -24,7 +24,8 @@ module.exports = {
     res.render("index", {
       title: "Archivo",
       errors,
-      recordCreated: false
+      recordCreated: false,
+      valuesErrors: ""
     });
   },
   addHc: async (req, res, next) => {
