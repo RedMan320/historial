@@ -8,9 +8,10 @@ const {
 const capitalizarPrimeraLetra = require('../utils/capitalizeOneLetter');
 const obtenerNumeros = require('../utils/obtenerNumero');
 const obtenerFecha = require('../utils/obtenerFecha');
+const { Op } = require('sequelize');
 
 module.exports = {
-  prueba: (req, res) =>{
+  prueba: (req, res) => {
     res.render('prueba')
   },
   error: (req, res) => {
@@ -81,11 +82,29 @@ module.exports = {
   },
   historias: async (req, res) => {
     try {
-      const historias = await HistoriasClinicas.findAll({
-        include: ['persona', 'caja'],
+      let { draw, length, start, search } = req.query
+      console.log(req.query);
+
+      let options = {
+        offset: +start,
+        limit: +length,
         order: [['id', 'desc']],
-      });
-      return res.json(historias);
+        include: ['persona', 'caja'],
+        where: {
+          hc: {
+            [Op.substring]: search.value
+          }
+        }
+      }
+      const { count, rows } = await HistoriasClinicas.findAndCountAll(options);
+      console.log(rows[0]);
+      const data = {
+        draw: draw,
+        iTotalDisplayRecords: count,
+        iTotalRecords: count,
+        data: rows
+      }
+      return res.json(data)
     } catch (error) {
       console.error(error);
       res.status(500).send('Error al obtener datos de la base');

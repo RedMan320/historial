@@ -21,30 +21,29 @@ const formatearFecha = (fechaISO) => {
 
 }
 
-let dataTable;
-let dataTableInitialized = false;
-
-
 const dataTableOptions = {
+    processing: true,
+    serverSide: true,
+    deferRender: true,
     ajax: {
-        url: '../../src/controllers/historias.php',
-        dataSrc: '', // Propiedad que contiene los datos en la respuesta
+        url: 'http://172.19.40.21:3001/historias',
+        type: 'get',
     },
     columns: [
         { data: 'hc' },
         { data: 'ultimoRegistro', render: (data) => formatearFecha(data) },
-        { 
-            data: 'persona', 
+        {
+            data: 'persona',
             render: (data) => {
                 return capitalizarPalabras(data.nombre) + ' ' + capitalizarPalabras(data.apellido);
             }
         },
         { data: null, render: (data) => `<a href="/hc/${data.id}"><i class="fa-solid fa-circle-info"></i></a>` },
     ],
-    lengthMenu: [10, 15, 20, 100, 200, 500],
+    lengthMenu: [10, 20, 50, 100, 200, 500],
     columnDefs: [
         { className: 'centered', targets: [0, 1, 2, 3] },
-        { orderable: false, targets: [3] },
+        { orderable: false, targets: [0, 1, 2, 3] },
         { searchable: false, targets: [3] }
     ],
     pageLength: 10,
@@ -57,12 +56,13 @@ const dataTableOptions = {
         search: 'Buscar:',
         loadingRecords: 'Cargando...',
         paginate: {
-            first: 'Primero',
-            last: 'Último',
-            next: 'Siguiente',
-            previous: 'Anterior'
+            first:    '«',
+            previous: '‹',
+            next:     '›',
+            last:     '»'
         }
-    },
+    }
+
 };
 
 
@@ -71,11 +71,6 @@ const initDataTable = () => {
 
     dataTable = $('#datatable_historias').DataTable(dataTableOptions);
 
-    // Add a click event listener for the action links
-    $('#datatable_historias tbody').on('click', 'a', function() {
-        const hcId = $(this).data('id');  // Extract the ID from the link
-        window.location.href = `/hc/${hcId}`;  // Redirect to the appropriate page
-    });
 };
 
 window.addEventListener('load', () => {
