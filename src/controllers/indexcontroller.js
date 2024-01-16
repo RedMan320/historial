@@ -3,7 +3,6 @@ const {
   HistoriasClinicas,
   Cajas,
   Personas,
-  Usuarios,
 } = require('../database/models');
 const capitalizeLetter = require('../utils/capitalizeLetter');
 const parceNum = require('../utils/parceNum');
@@ -11,13 +10,6 @@ const parceDate = require('../utils/parceDate');
 const { Op } = require('sequelize');
 
 module.exports = {
-  error: (req, res) => {
-    if (res.status(404)) {
-      res.render('index', {
-        message: 'Pagina no encontrada',
-      });
-    }
-  },
   index: (req, res) => {
     const errors = validationResult(req);
     res.render('index', {
@@ -49,7 +41,7 @@ module.exports = {
 
         await HistoriasClinicas.create({
           hc: hc.trim(),
-          lastAppointmentDate: lastAppointmentDate.setDate(lastAppointmentDate.getDate()),
+          ultimoRegistro: lastAppointmentDate.setDate(lastAppointmentDate.getDate()),
           personaId: personId,
           cajaId: boxId,
           vigente: 1,
@@ -89,6 +81,9 @@ module.exports = {
         where: {
           hc: {
             [Op.substring]: search.value
+          },
+          vigente: {
+            [Op.ne]: 0
           }
         }
       }
@@ -134,43 +129,6 @@ module.exports = {
       }
     } catch (error) {
       console.error(error);
-    }
-  },
-
-  login: (req, res) => {
-    res.render('login', {
-      title: 'Iniciar Sesión',
-    });
-  },
-  processLogin: (req, res) => {
-    let errors = validationResult(req);
-
-    if (errors.isEmpty()) {
-      const user = req.body.user.trim();
-      Usuarios.findOne({
-        where: {
-          user,
-        },
-      })
-        .then((user) => {
-          req.session.userLogin = {
-            id: user.id,
-            usuario: user.usuario,
-          };
-          res.cookie('recordarme', req.session.userLogin, {
-            maxAge: 1000 * 60,
-          });
-          /* if (recordar) {
-              res.cookie('recordarme', req.session.userLogin, { maxAge: 1000 * 60 })
-          } */
-          return res.redirect('/listado');
-        })
-        .catch((error) => console.error(error));
-    } else {
-      return res.render('login', {
-        title: 'Iniciar Sesión',
-        errors: errors.mapped(),
-      });
     }
   },
   destroy: (req, res) => {
@@ -224,7 +182,7 @@ module.exports = {
       await HistoriasClinicas.update(
         {
           hc: hc.trim(),
-          lastAppointmentDate: lastAppointmentDate.setDate(lastAppointmentDate.getDate() + 1),
+          ultimoRegistro: lastAppointmentDate.setDate(lastAppointmentDate.getDate() + 1),
         },
         {
           where: { id: req.params.id },
