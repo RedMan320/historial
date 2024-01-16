@@ -132,7 +132,7 @@ parceNum = (str) => {
   return numeros ? numeros.join('') : '';
 };
 hc.addEventListener('blur', () => {
-  var ultimosTresNumeros = ';
+  var ultimosTresNumeros = '';
 
   let value = hc.value.trim();
   let valueNum = parceNum(value);
