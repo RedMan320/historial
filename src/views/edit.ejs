@@ -6,7 +6,7 @@
       <form action="/hc/edit/<%= historia.id %>?_method=PUT" method="POST" id="form" class="form">
         <section class="form-register ">
           <h4 class="text-center">Editar Historia Clínica</h4>
-          <input class="controls" type="text" name="hc" id="hc" placeholder="HC/DNI" data-index="0"
+          <input class="controls" type="text" name="hc" id="hc" placeholder="I" data-index="0"
             value="<%= historia.hc %>">
 
           <% if (locals.errors && errors.hc) { %>
@@ -48,7 +48,7 @@
                         </div>
                         <% } %>
                           <input class="controls" type="text" name="box" id="box"
-                            placeholder="Últimos 3 digitos del DNI" data-index="4"
+                            placeholder="Últimos 3 digitos de la cedula" data-index="4"
                             value="<%= historia.caja.codigoBarras %>">
 
                           <% if (locals.errors && errors.box) { %>

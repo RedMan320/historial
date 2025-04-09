@@ -6,7 +6,7 @@
       <form action='/' method='POST' id='form' class='form'>
         <section class='form-register '>
           <h4 class='text-center'>Ingreso de Historia Clínica</h4>
-          <input class='controls' type='text' name='hc' id='hc' placeholder='HC/DNI' data-index='0' autocomplete='off'>
+          <input class='controls' type='text' name='hc' id='hc' placeholder='CEDULA' data-index='0' autocomplete='off'>
 
           <% if (locals.errors && errors.hc) { %>
             <div class='box-errores-back'>
@@ -15,7 +15,7 @@
               </span>
             </div>
             <% } %>
-            <input class='controls' type='text' name='hc2' id='hc2' placeholder='Repita HC' data-index='5'autocomplete='off'>
+            <input class='controls' type='text' name='hc2' id='hc2' placeholder='Repita CEDULA' data-index='5'autocomplete='off'>
 
             <% if (locals.errors && errors.hc2) { %>
               <div class='box-errores-back'>
@@ -56,7 +56,7 @@
                         </div>
                         <% } %>
                           <input class='controls' type='text' name='box' id='box'
-                            placeholder='Últimos 3 digitos del DNI' data-index='4' >
+                            placeholder='Últimos 3 digitos de la cedula' data-index='4' >
 
                           <% if (locals.errors && errors.box) { %>
                             <div class='box-errores-back'>
