@@ -76,3 +76,4 @@ const initDataTable = () => {
 window.addEventListener('load', () => {
     initDataTable();
 });
+
