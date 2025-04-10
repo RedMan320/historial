@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "csurf": "^1.10.0",
     "datatables.net-dt": "^1.13.8",
     "debug": "~2.6.9",
     "dotenv": "^16.4.7",

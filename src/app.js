@@ -12,10 +12,9 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 app.set('trust proxy', true);
-//method-override
 
 app.use(method('_method'))
-// view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -25,10 +24,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '..','public')));
 app.use(session({
-  secret : 'mi secreto',
-  saveUninitialized : true,
-  resave : false,
+  secret: 'mi secreto',
+  saveUninitialized: true,
+  resave: false,
+  cookie: {
+    httpOnly: true, // La cookie no será accesible a través de JavaScript
+    secure: process.env.NODE_ENV === 'production', // Solo se enviará por HTTPS en producción
+  },
 }));
+
 
 app.use(localUser)
 
